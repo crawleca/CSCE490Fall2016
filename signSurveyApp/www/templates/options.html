@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="../manifest" href="../manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="../lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="../cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="../js/app.js"></script>
+  </head>
+  <body ng-app="starter">
+
+	<nav id="nav01"></nav>
+  
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+	  
+	  <h1 class="title">
+	  Options Menu
+	  </h1>
+    
+	  </ion-header-bar>
+      
+	  <ion-content>
+	  
+		<div class="options">
+		
+		<ion-toggle ng-model="confirmBox" toggle-class="toggle-calm">Confirm Box</ion-toggle>
+		<ion-toggle ng-model="remember" toggle-class="toggle-calm">Remember Login</ion-toggle>
+		
+		<!--<label class="item item-input">
+		Input File
+		<input type="text" placeholder="input file name" id="user">
+		</label> -->
+		
+		<ion-item>
+		<ion-label floating>Input File</ion-label>
+		<ion-input>input file name</ion-input>
+		</ion-item>
+		
+		<ion-item>
+		<ion-label floating>Output File</ion-label>
+		<ion-input>output file name</ion-input>
+		</ion-item>
+		
+		<ion-item>
+		<ion-label floating>Firebase Account</ion-label>
+		<ion-input>firebase account</ion-input>
+		</ion-item>
+		
+			<div class="item item-input-inset">
+				<button class="button button-full button-positive button-stable" id="btest">
+				Quit
+				</button>
+				<button class="button button-full button-positive button-stable" id="btest">
+				Submit
+				</button>
+			</div>	
+		</div>
+      </ion-content>
+	  
+    </ion-pane>
+  </body>
+</html>
