@@ -1,69 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
-    <link rel="manifest" href="../manifest.json">
-
-    <!-- un-comment this code to enable service worker
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script>-->
-
-    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="../css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
-    <script src="../lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="../cordova.js"></script>
-
-    <!-- your app's js -->
-    <script src="../js/app.js"></script>
-  </head>
-  <body ng-app="starter">
-
-	<nav id="nav01"></nav>
-  
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-	  
-	  <h1 class="title">
-	  <img src="../img/scdot.png">
-	  </h1>
-    
-	  </ion-header-bar>
-      
-	  <ion-content>
-	  
-		<div class="login">
-		
-		<label class="item item-input">
-		<input type="text" placeholder="Enter Username" id="user">
-		</label>
-		
-		<label class="item item-input">
-		<input type="password" placeholder="Enter Password" id="password">
-		</label>
-		
-		<button class="button button-full button-positive button-stable" ng-click="login()">
-		Submit
-		</button>
-
-		</div>
-	  
-      </ion-content>
-	  
-    </ion-pane>
-  </body>
-</html>
+<ion-view title="Login" hide-nav-bar="true" cache-view="false" nav-transition="none" id="page2">
+  <ion-content padding="true" class="manual-ios-statusbar-padding" scroll="false">
+    <form id="login-form1" class="list">
+      <div>
+        <img src="img/II8QLrswQYyxBt1Kftmc_SCDOT.jpg" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
+      </div>
+      <ion-list id="login-list1">
+        <label class="item item-input" id="login-input1">
+          <span class="input-label">Email:</span>
+          <input type="email" placeholder="">
+        </label>
+        <label class="item item-input" id="login-input2">
+          <span class="input-label">Password:</span>
+          <input type="password" placeholder="">
+        </label>
+      </ion-list>
+      <div class="spacer" style="height: 40px;"></div>
+      <a ui-sref="homePage" id="login-button1" class="button button-positive  button-block">Log in</a>
+      <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+    </form>
+  </ion-content>
+</ion-view>
