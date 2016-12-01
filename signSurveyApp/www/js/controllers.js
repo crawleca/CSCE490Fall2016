@@ -1,34 +1,86 @@
 angular.module('app.controllers', [])
   
-.controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
+.controller('loginCtrl', function($scope, LoginService, $ionicPopup, $state) {
+	
+	$scope.data = {};
+	
+	$scope.login = function() {
+		LoginService.loginUser($scope.data.user, $scope.data.password).success(function(data) {
+			$state.go('homePage');
+		}).error(function(data) {
+			var alertPopup = $ionicPopup.alert({
+				title: 'Login failed!',
+				template: 'Please check your credentials! All you have to do is enter a valid email and something in password'
+			});
+		})
+	}
+	
+	$scope.signup = function() {
+		$state.go('signup')
+	}
+})
    
-.controller('signupCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+.controller('signupCtrl', function($scope, UserService, $ionicPopup, $state) {
+		
+	$scope.data = {};
+	
+	$scope.createUser = function() {
+		
+		UserService.createUser($scope.data.name, $scope.data.email, $scope.data.password, $scope.data.confirmPassword).success(function(data) {
+			$state.go('login');
+		}).error(function(data) {
+			var alertPopup = $ionicPopup.alert({
+				title: 'Creation failed',
+				template: 'Please check syntax!'
+			});
+		})
+	}
+})
 
+.controller('homePageCtrl', function($scope, $state) {
+	
+	$scope.newRecord = function() {
+		$state.go('newRecord');
+	}
+	
+	$scope.modifyRecord = function() {
+		$state.go('modifyRecord');
+	}
+	
+	$scope.searchRecord = function() {
+		//What ever you want to do
+	}
+	
+	$scope.options = function() {
+		$state.go('options');
+	}
+	
+	$scope.signOut = function() {
+		$state.go('login');
+	}
+	
+	
+})
 
-}])
-   
-.controller('homePageCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+.controller('newRecordCtrl', function($scope, $state) {
+		
+		
+})
 
+.controller('modifyRecordCtrl', function($scope, $state) {
+		
+		
+})
 
-}])
-   
-.controller('newRecordCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
+.controller('optionsCtrl', function($scope, $state) {
+		
+	$scope.oQuit = function() {
+		$state.go('homePage');
+	}
+	
+	$scope.oSubmit = function() {
+		$state.go('homePage');
+	}
+		
+})
  

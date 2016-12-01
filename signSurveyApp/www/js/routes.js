@@ -8,34 +8,42 @@ angular.module('app.routes', [])
   // Each state's controller can be found in controllers.js
   $stateProvider
     
-  
-
-      .state('login', {
-    url: '/page2',
+    .state('login', {
+    url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
 
   .state('signup', {
-    url: '/page3',
+    url: '/signup',
     templateUrl: 'templates/signup.html',
     controller: 'signupCtrl'
   })
 
   .state('homePage', {
-    url: '/page4',
+    url: '/homePage',
     templateUrl: 'templates/homePage.html',
     controller: 'homePageCtrl'
   })
 
   .state('newRecord', {
-    url: '/page5',
+    url: '/newRecord',
     templateUrl: 'templates/newRecord.html',
     controller: 'newRecordCtrl'
   })
-
-$urlRouterProvider.otherwise('/page2')
-
   
+  .state('modifyRecord', {
+    url: '/modifyRecord',
+    templateUrl: 'templates/modifyRecord.html',
+    controller: 'modifyRecordCtrl'
+  })
+  
+  .state('options', {
+	  url: '/options',
+	  templateUrl: 'templates/options.html',
+	  controller: 'optionsCtrl'
+  })
+
+$urlRouterProvider.otherwise('/login')
 
 });

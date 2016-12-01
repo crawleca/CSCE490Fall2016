@@ -1,4 +1,4 @@
-<ion-view title="Login" hide-nav-bar="true" cache-view="false" nav-transition="none" id="page2">
+<ion-view title="Login" hide-nav-bar="true" cache-view="false" nav-transition="none" id="login">
   <ion-content padding="true" class="manual-ios-statusbar-padding" scroll="false">
     <form id="login-form1" class="list">
       <div>
@@ -7,16 +7,16 @@
       <ion-list id="login-list1">
         <label class="item item-input" id="login-input1">
           <span class="input-label">Email:</span>
-          <input type="email" placeholder="">
+          <input type="email" placeholder="" ng-model="data.user">
         </label>
         <label class="item item-input" id="login-input2">
           <span class="input-label">Password:</span>
-          <input type="password" placeholder="">
+          <input type="password" placeholder="" ng-model="data.password">
         </label>
       </ion-list>
       <div class="spacer" style="height: 40px;"></div>
-      <a ui-sref="homePage" id="login-button1" class="button button-positive  button-block">Log in</a>
-      <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+      <button id="login-button1" class="button button-positive  button-block" ng-click="login()">Log in</button>
+      <button id="login-button2" class="button button-positive  button-block button-clear" ng-click="signup()">Or create an account</button>
     </form>
   </ion-content>
 </ion-view>
