@@ -101,7 +101,13 @@ angular.module('app.controllers', [])
 
 .controller('newRecordCtrl', function($scope, $state) {
 		
-		
+            $scope.submitNR = function() {
+               $state.go('homePage')
+            }
+            
+            $scope.cancelNR = function() {
+                $state.go('homePage')
+            }
 })
 
 .controller('modifyRecordCtrl', function($scope, $state) {
