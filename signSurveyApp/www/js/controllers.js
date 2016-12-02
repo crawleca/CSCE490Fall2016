@@ -11,7 +11,7 @@ angular.module('app.controllers', [])
 			$state.go('homePage')
 		
 			$ionicPopup.alert({
-				title: 'Already Logged On',
+				title: 'Logged On',
 				template: user.email + ' is logged on!'
 			});
 		} else {
@@ -65,11 +65,24 @@ angular.module('app.controllers', [])
 	}
 })
 
-.controller('homePageCtrl', function($scope, $state, $ionicHistory) {
+.controller('homePageCtrl', function($scope, $state) {
 	
-	$ionicHistory.nextViewOptions({
-		disableBack: true
-	});
+	/*$scope.$on("$ionicView.enter", function ( scopes, states) {
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user) {
+			// user is logged on, so evertyhing is fine
+			} else {
+			// No user is signed in.
+				$state.go('login');
+		
+					$ionicPopup.alert({
+						title: 'Connection Lost',
+						template: user.email + ' not logged on!'
+					});
+			}
+		});
+	})*/
 	
 	$scope.newRecord = function() {
 		$state.go('newRecord');
@@ -100,8 +113,11 @@ angular.module('app.controllers', [])
 })
 
 .controller('newRecordCtrl', function($scope, $state) {
-		
-		
+
+	$scope.submitNR = function() {
+		alert("submitNR");
+	}	
+
 })
 
 .controller('modifyRecordCtrl', function($scope, $state) {
