@@ -1,18 +1,44 @@
 angular.module('app.controllers', [])
   
-.controller('loginCtrl', function($scope, LoginService, $ionicPopup, $state) {
+.controller('loginCtrl', function($scope, $ionicPopup, $state) {
 	
 	$scope.data = {};
 	
-	$scope.login = function() {
-		LoginService.loginUser($scope.data.user, $scope.data.password).success(function(data) {
-			$state.go('homePage');
-		}).error(function(data) {
-			var alertPopup = $ionicPopup.alert({
-				title: 'Login failed!',
-				template: 'Please check your credentials! All you have to do is enter a valid email and something in password'
+	$scope.$on("$ionicView.enter", function ( scopes, states) {
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			$state.go('homePage')
+		
+			$ionicPopup.alert({
+				title: 'Already Logged On',
+				template: user.email + ' is logged on!'
 			});
-		})
+		} else {
+		// No user is signed in.
+		}
+		});
+		
+		/*firebase.auth().signOut().then(function() {
+		// Sign-out successful.
+		}, function(error) {
+		// An error happened.
+		});*/
+		
+	})
+	
+	$scope.login = function() {
+
+		firebase.auth().signInWithEmailAndPassword($scope.data.user, $scope.data.password).catch(function(error) {
+			// Handle Errors here.
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			
+			$ionicPopup.alert({
+				title: 'Login failed!',
+				template: errorMessage
+				});
+		});
 	}
 	
 	$scope.signup = function() {
@@ -20,24 +46,30 @@ angular.module('app.controllers', [])
 	}
 })
    
-.controller('signupCtrl', function($scope, UserService, $ionicPopup, $state) {
+.controller('signupCtrl', function($scope, $ionicPopup, $state) {
 		
 	$scope.data = {};
 	
 	$scope.createUser = function() {
 		
-		UserService.createUser($scope.data.name, $scope.data.email, $scope.data.password, $scope.data.confirmPassword).success(function(data) {
-			$state.go('login');
-		}).error(function(data) {
-			var alertPopup = $ionicPopup.alert({
-				title: 'Creation failed',
-				template: 'Please check syntax!'
+		firebase.auth().createUserWithEmailAndPassword($scope.data.email, $scope.data.password).catch(function(error) {
+			// Handle Errors here.
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			$ionicPopup.alert({
+				title: 'Try again',
+				template: errorMessage
 			});
-		})
+		});
+		$state.go('login')
 	}
 })
 
-.controller('homePageCtrl', function($scope, $state) {
+.controller('homePageCtrl', function($scope, $state, $ionicHistory) {
+	
+	$ionicHistory.nextViewOptions({
+		disableBack: true
+	});
 	
 	$scope.newRecord = function() {
 		$state.go('newRecord');
@@ -56,10 +88,15 @@ angular.module('app.controllers', [])
 	}
 	
 	$scope.signOut = function() {
+		
+		firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		}, function(error) {
+			alert("Failed to Sign Out");
+		});
+		
 		$state.go('login');
-	}
-	
-	
+	}	
 })
 
 .controller('newRecordCtrl', function($scope, $state) {

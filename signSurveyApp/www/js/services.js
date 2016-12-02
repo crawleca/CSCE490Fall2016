@@ -1,43 +1,36 @@
 angular.module('app.services', [])
 
-.factory('UserService', function($q) {
+.service('login', function($state) {
+
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+		// User is signed in.
+		//We need to sign out to sign in another user
+		} else {
+		// No user is signed in.
+		//start the login in procedure
+		}
+	});
+	
+	
+})
+
+.factory('UserService', function($q, $ionicPopup) {
 	
 		function createUserFirebase(email, pw)
 		{
-			/*alert("Running create user");
-			firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			alert(errorCode);
-			alert(errorMessage);
-			});*/
-			
-			var ref = new Firebase("https://scdotproject-27a59.firebaseio.com/");
 
-			ref.createUser({
-				email    : email,
-				password : pw
-			}, function(error, userData) {
-				if (error) {
-					console.log("Error creating user:", error);
-					alert(error);
-				} else {
-				console.log("Successfully created user account with uid:", userData.uid);
-				alert(userData.uid);
-				}
-			});
 		}
 	
-	    return {
+	return {
         createUser: function(name, email, pw, cpw) {
 			
             var deferred = $q.defer();
             var promise = deferred.promise;
 			
             if (pw == cpw && email != null && name != null && pw != null) {
-                deferred.resolve('Creating ' + name + '!');
-				createUserFirebase(email,pw);
+					createUserFirebase(email,pw)
+					deferred.resolve('Creating ' + name + '!');
             } else {
                 deferred.reject('Check Syntax.');
             }
@@ -55,34 +48,30 @@ angular.module('app.services', [])
 	
 })
 
-.factory('LoginService', function($q) {
-
-	// Initialize Firebase
-	/*var config = {
-		apiKey: "AIzaSyCCv098ymUzetwwuG0E0U_qxhXcw4vJOLk",	
-		authDomain: "scdotproject-27a59.firebaseapp.com",
-		databaseURL: "https://scdotproject-27a59.firebaseio.com",
-		storageBucket: "scdotproject-27a59.appspot.com",
-		messagingSenderId: "657470588429"
-  };
-  firebase.initializeApp(config);*/
-  
-  function firebaseLogin(email, pw) {
-	  
-	  var ref = new Firebase("https://scdotproject-27a59.firebaseio.com/");
-		ref.authWithPassword({
-			email    : email,
-			password : pw
-		}, function(error, authData) {
-		if (error) {
-			console.log("Login Failed!", error);
-			alert(error);
-		} else {
-			console.log("Authenticated successfully with payload:", authData);
-			alert(userData.uid);
-		}
-		});
-  }
+.factory('LoginService', function($q, firbaseData) {
+ 
+	function firebaseLogin(email, pw) {
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user) {
+				// User is signed in.
+				alert("User already signed in");
+	
+			} else {
+				// No user is signed in.
+				firebase.auth().signInWithEmailAndPassword(email, pw).catch(function(error) {
+					// Handle Errors here.
+					var errorCode = error.code;
+					var errorMessage = error.message;
+			
+					var alertPopup = $ionicPopup.alert({
+						title: 'Login failed!',
+						template: errorMessage
+					});
+				});
+			}
+		});		
+	}
 
     return {
         loginUser: function(email, pw) {
@@ -91,7 +80,7 @@ angular.module('app.services', [])
             var promise = deferred.promise;
  
 			//Final program will only be successful if firebaseLogin returned true
-            if (email != null && pw !=null /*&& firebaseLogin(email,pw)*/) {
+            if (email != null && pw !=null) {
 				firebaseLogin(email,pw)
                 deferred.resolve('Welcome ' + email + '!');
             } else {
@@ -109,6 +98,43 @@ angular.module('app.services', [])
             return promise;
         }
     }
+})
+
+.service('firbaseData', function () {
+	
+  /*// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCCv098ymUzetwwuG0E0U_qxhXcw4vJOLk",
+    authDomain: "scdotproject-27a59.firebaseapp.com",
+    databaseURL: "https://scdotproject-27a59.firebaseio.com",
+    storageBucket: "scdotproject-27a59.appspot.com",
+    messagingSenderId: "657470588429"
+  };
+  firebase.initializeApp(config);
+  
+  var rootRef = firebase.database().ref();
+  
+  return {
+	  getRootRef: function () {
+		  return rootRef;
+	  },
+	  getConfig : function() {
+		  return config;
+	  }
+  };*/
+
+})
+
+.service('sharedProperties', function () {
+	var property = 'First';
+	return {
+		getProperty: function () {
+			return property;
+            },
+			setProperty: function(value) {
+				property = value;
+            }
+        };
 })
 
 .factory('BlankFactory', [function(){
