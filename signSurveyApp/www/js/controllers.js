@@ -101,14 +101,23 @@ angular.module('app.controllers', [])
 
 .controller('newRecordCtrl', function($scope, $state) {
 		
+            $scope.data = {};
+            
             $scope.submitNR = function() {
                 alert("submitNR pressed")
+    /*        firebase.database().ref('user/' + userID).set({
+            
+            }) */
                 $state.go('homePage')
             }
             
             $scope.cancelNR = function() {
                 alert("cancelNR pressed")
                 $state.go('homePage')
+            }
+            
+            $scope.addImage = function() {
+            alert("addImage pressed")
             }
 })
 

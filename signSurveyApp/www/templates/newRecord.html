@@ -65,6 +65,22 @@
         <span class="input-label">User Comment:</span>
         <input type="text" placeholder="" ng-model="data.userComments">
       </label>
+      <div class="spacer" style="width: 300px; height: 34px;"></div>
+      <label class="item item-input" id="newRecord-input15">
+          <span class="input-label">Direction:</span>
+          <input type="text" placeholder="" ng-model="data.direction">
+      </label>
+      <div class="spacer" style="width: 300px; height: 34px;"></div>
+      <label class="item item-input" id="newRecord-input16">
+          <span class="input-label">Height:</span>
+          <input type="text" placeholder="" ng-model="data.height">
+      </label>
+      <div class="spacer" style="width: 300px; height: 34px;"></div>
+      <label> Current Image </label>
+      <div class="spacer" style="width: 300px; height: 34px;"></div>
+      <img ng-repeat="image in images" ng-src="{{urlForImage(image)}} height = "500px"/>
+      <button id="newRecord-button11" style="border-radius:14px 14px 14px 14px;" class="button button-positive"  button-block ng-click="addImage()">Add Image </button>
+      <div class="spacer" style="width: 300px; height: 34px;"></div>
       <button id="newRecord-button10" style="border-radius:14px 14px 14px 14px;" class="button button-positive"  button-block ng-click="submitNR()">Submit New Record </button>
       <button id="newRecord-button9" style="border-radius:14px 14px 14px 14px;" class="button button-positive" ng-click="cancelNR()">Cancel </button>
     </form>
