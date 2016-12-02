@@ -102,10 +102,12 @@ angular.module('app.controllers', [])
 .controller('newRecordCtrl', function($scope, $state) {
 		
             $scope.submitNR = function() {
-               $state.go('homePage')
+                alert("submitNR pressed")
+                $state.go('homePage')
             }
             
             $scope.cancelNR = function() {
+                alert("cancelNR pressed")
                 $state.go('homePage')
             }
 })
