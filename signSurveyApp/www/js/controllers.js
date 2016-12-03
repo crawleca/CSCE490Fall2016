@@ -101,13 +101,33 @@ angular.module('app.controllers', [])
 
 .controller('newRecordCtrl', function($scope, $state) {
 		
-            $scope.data = {};
+
+         $scope.data = {};
             
             $scope.submitNR = function() {
-                alert("submitNR pressed")
-    /*        firebase.database().ref('user/' + userID).set({
             
-            }) */
+            
+            var myFirebase = firebase.database().ref(Sign);
+            
+            var Sign = myFirebase.child("Sign");
+            
+            Sign.push({
+                      "Msrmt" : $scope.data.msrmt,
+                      "02 Alpha Legend" : $scope.data.twoAlphaLegend,
+                      "05 Alpha Legend" : $scope.data.fiveAlphaLegend,
+                      "02 Alpha Background" : $scope.data.twoAlphaBkgrnd,
+                      "05 Alpha Background" : $scope.data.fiveAlphaBkgrnd,
+                      "Date" : $scope.data.date,
+                      "Time" : $scope.data.time,
+                      "Latitude" : $scope.data.latitude,
+                      "Longitude" : $scope.data.longitude,
+                      "Position Accuracy (m)" : $scope.data.accuracy,
+                      "Barcode" : $scope.data.barcode,
+                      "Standard Comments" : $scope.data.standardComments,
+                      "User Comments" : $scope.data.userComments,
+                      "Direction" : $scope.data.direction,
+                      "Height" : $scope.data.height
+                      });
                 $state.go('homePage')
             }
             
