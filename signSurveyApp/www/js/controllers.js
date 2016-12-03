@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['ngCordova'])
+angular.module('app.controllers', [])
   
 .controller('loginCtrl', function($scope, $ionicPopup, $state) {
 	
