@@ -19,8 +19,8 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			$ionicPopup.alert({
-				title: 'Logging on with old user',
-				template: ' A user is already signed on!'
+				title: 'Logging on',
+				template: firebase.auth().currentUser.email + ' signed on!'
 			});	
 				
 			$state.go('homePage');
