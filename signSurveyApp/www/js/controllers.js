@@ -127,6 +127,8 @@ angular.module('app.controllers', [])
                       "User Comments" : $scope.data.userComments,
                       "Direction" : $scope.data.direction,
                       "Height" : $scope.data.height
+                      
+                    
                       });
                 $state.go('homePage')
             }
