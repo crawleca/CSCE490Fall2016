@@ -1,68 +1,48 @@
 angular.module('app.controllers', [])
   
-.controller('loginCtrl', function($scope, $ionicPopup, $state) {
+.controller('loginCtrl', function($scope, $ionicPopup, $state, loginFirebase) {
 	
 	$scope.data = {};
 	
-	$scope.$on("$ionicView.enter", function ( scopes, states) {
-		
-		firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-			$state.go('homePage')
-		
-			$ionicPopup.alert({
-				title: 'Already Logged On',
-				template: user.email + ' is logged on!'
-			});
-		} else {
-		// No user is signed in.
-		}
-		});
-		
-		/*firebase.auth().signOut().then(function() {
-		// Sign-out successful.
-		}, function(error) {
-		// An error happened.
+		/*firebase.auth().onAuthStateChanged(function(user) {
+			if (user) {
+				$ionicPopup.alert({
+					title: 'YES',
+					template: 'User is already signed on'
+				});	
+				
+				$state.go('homePage');
+				
+			} else {
+				$ionicPopup.alert({
+					title: 'NO',
+				template: 'User is not logged on'
+				});	
+			}
 		});*/
-		
-	})
-	
-	$scope.login = function() {
 
-		firebase.auth().signInWithEmailAndPassword($scope.data.user, $scope.data.password).catch(function(error) {
-			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			
-			$ionicPopup.alert({
-				title: 'Login failed!',
-				template: errorMessage
-				});
-		});
+	$scope.login = function() {
+		loginFirebase.login($scope);
 	}
 	
 	$scope.signup = function() {
-		$state.go('signup')
+		$state.go('signup');
 	}
 })
    
-.controller('signupCtrl', function($scope, $ionicPopup, $state) {
-		
+.controller('signupCtrl', function($scope, $ionicHistory, createAccount) {
+	
 	$scope.data = {};
 	
 	$scope.createUser = function() {
 		
-		firebase.auth().createUserWithEmailAndPassword($scope.data.email, $scope.data.password).catch(function(error) {
-			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			$ionicPopup.alert({
-				title: 'Try again',
-				template: errorMessage
-			});
-		});
-		$state.go('login')
+		createAccount.createUser($scope);
 	}
+	
+	$scope.backUser = function(){
+		
+		$ionicHistory.goBack();
+	}	
 })
 
 .controller('homePageCtrl', function($scope, $state, $ionicHistory) {
@@ -95,7 +75,7 @@ angular.module('app.controllers', [])
 			alert("Failed to Sign Out");
 		});
 		
-		$state.go('login');
+		//$state.go('login');
 	}	
 })
 
@@ -134,13 +114,13 @@ angular.module('app.controllers', [])
            
             var a = document.getElementsByName('signForm') [0];
             a.reset();
-            $state.go('homePage')
+            $state.go('homePage');
             return false;
 
             }
             
             $scope.cancelNR = function() {
-                $state.go('homePage')
+                $state.go('homePage');
             }
             
             $scope.addImage = function() {
@@ -153,14 +133,14 @@ angular.module('app.controllers', [])
 		
 })
 
-.controller('optionsCtrl', function($scope, $state) {
+.controller('optionsCtrl', function($scope, $ionicHistory) {
 		
 	$scope.oQuit = function() {
-		$state.go('homePage');
+		$ionicHistory.goBack();
 	}
 	
 	$scope.oSubmit = function() {
-		$state.go('homePage');
+		$ionicHistory.goBack();
 	}
 		
 })

@@ -14,7 +14,26 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $state, $ionicPopup) {
+	
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			$ionicPopup.alert({
+				title: 'Logging on with old user',
+				template: ' A user is already signed on!'
+			});	
+				
+			$state.go('homePage');
+				
+		} else {
+			/*$ionicPopup.alert({
+				title: 'NO',
+			template: 'User is not logged on'
+			});	*/
+			$state.go('login');
+		}
+	});	
+	
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
