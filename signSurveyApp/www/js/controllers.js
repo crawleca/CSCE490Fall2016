@@ -106,7 +106,6 @@ angular.module('app.controllers', [])
             
             $scope.submitNR = function() {
             
-            alert("popup");
           
             var myFirebase = firebase.database().ref(Sign);
             
