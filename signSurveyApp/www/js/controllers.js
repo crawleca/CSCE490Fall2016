@@ -101,40 +101,46 @@ angular.module('app.controllers', [])
 
 .controller('newRecordCtrl', function($scope, $state) {
 		
-
-         $scope.data = {};
+            
+            $scope.data = {};
             
             $scope.submitNR = function() {
             
-            
+            alert("popup");
+          
             var myFirebase = firebase.database().ref(Sign);
             
             var Sign = myFirebase.child("Sign");
             
-            Sign.push({
-                      "Msrmt" : $scope.data.msrmt,
-                      "02 Alpha Legend" : $scope.data.twoAlphaLegend,
-                      "05 Alpha Legend" : $scope.data.fiveAlphaLegend,
-                      "02 Alpha Background" : $scope.data.twoAlphaBkgrnd,
-                      "05 Alpha Background" : $scope.data.fiveAlphaBkgrnd,
-                      "Date" : $scope.data.date,
-                      "Time" : $scope.data.time,
-                      "Latitude" : $scope.data.latitude,
-                      "Longitude" : $scope.data.longitude,
-                      "Position Accuracy (m)" : $scope.data.accuracy,
-                      "Barcode" : $scope.data.barcode,
-                      "Standard Comments" : $scope.data.standardComments,
-                      "User Comments" : $scope.data.userComments,
-                      "Direction" : $scope.data.direction,
-                      "Height" : $scope.data.height
-                      
-                    
+            var msrmt = $scope.data.msrmt;
+            var twoAlphaLegend = $scope.data.twoAlphaLegend;
+            var fiveAlphaLegend = $scope.data.fiveAlphaLegend;
+            var twoAlphaBkgrnd = $scope.data.twoAlphaBkgrnd;
+            var fiveAlphaBkgrnd = $scope.data.fiveAlphaBkgrnd;
+            var latitude = $scope.data.latitude;
+            var longitude = $scope.data.longitude;
+            var accuracy = $scope.data.accuracy;
+            var barcode = $scope.data.barcode;
+            var standardComments = $scope.data.standardComments;
+            var userComments = $scope.data.userComments;
+            var direction = $scope.data.direction;
+            var height = $scope.data.height;
+            var date = $scope.data.date;
+            var time = $scope.data.time;
+            
+
+            Sign.push({msrmt, twoAlphaLegend, fiveAlphaLegend, twoAlphaBkgrnd, fiveAlphaBkgrnd, latitude, accuracy, barcode, standardComments, userComments, direction, height, date, time
                       });
-                $state.go('homePage')
+            
+           
+            var a = document.getElementsByName('signForm') [0];
+            a.reset();
+            $state.go('homePage')
+            return false;
+
             }
             
             $scope.cancelNR = function() {
-                alert("cancelNR pressed")
                 $state.go('homePage')
             }
             
