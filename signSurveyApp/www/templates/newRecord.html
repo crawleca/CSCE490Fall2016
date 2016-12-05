@@ -77,10 +77,11 @@
       </label>
       <div class="spacer" style="width: 300px; height: 34px;"></div>
       <label> Current Image </label>
+      
       <div class="spacer" style="width: 300px; height: 34px;"></div>
-      <img ng-repeat="image in images" ng-src="{{urlForImage(image)}} height = "500px"/>
-      <button id="newRecord-button11" style="border-radius:14px 14px 14px 14px;" class="button button-positive"  button-block ng-click="addImage()">Add Image </button>
+      <button id="newRecord-button11" style="border-radius:14px 14px 14px 14px;" class="button button-positive button-energized"  button-block ng-click="addMedia()">Add Image </button>
       <div class="spacer" style="width: 300px; height: 34px;"></div>
+      <img ng-repeat="image in images" ng-src="data:image/jpeg;base64,{{image}}" height = "500px"/>
       <button id="newRecord-button10" style="border-radius:14px 14px 14px 14px;" class="button button-positive"  button-block ng-click="submitNR()">Submit New Record </button>
       <button id="newRecord-button9" style="border-radius:14px 14px 14px 14px;" class="button button-positive" ng-click="cancelNR()">Cancel </button>
     </form>
