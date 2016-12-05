@@ -129,8 +129,70 @@ angular.module('app.controllers', [])
 })
 
 .controller('modifyRecordCtrl', function($scope, $state) {
-		
-		
+            
+            $scope.data = {}
+            
+            var myFirebase = firebase.database().ref("Sign/1");
+            
+
+            myFirebase.once('value').then(function(snapshot) {
+              snapshot.val().accuracy;
+              snapshot.val().barcode;
+              snapshot.val().date;
+              snapshot.val().direction;
+              snapshot.val().fiveAlphaBkgrnd;
+              snapshot.val().fiveAlphaLegend;
+              snapshot.val().height;
+              snapshot.val().latitude;
+              snapshot.val().longitude;
+              snapshot.val().msrmt;
+              snapshot.val().standardComments;
+              snapshot.val().twoAlphaBkgrnd;
+              snapshot.val().twoAlphaLegend;
+              snapshot.val().userComments;
+            })
+            var overWrite = {
+            
+            accuracy: $scope.data.accuracy,
+            barcode: $scope.data.barcode,
+            date: $scope.data.date,
+            direction: $scope.data.direction,
+            fiveAlphaBkgrnd: $scope.data.fiveAlphaBkgrnd,
+            fiveAlphaLegend: $scope.data.fiveAlphaLegend,
+            height: $scope.data.height,
+            latitude: $scope.data.latitude,
+            longitude: $scope.data.longitude,
+            msrmt: $scope.data.msrmt,
+            standardComments: $scope.data.standardComments,
+            twoAlphaBkgrnd: $scope.data.twoAlphaBkgrnd,
+            twoAlphaLegend: $scope.data.twoAlphaLegend,
+            userComments: $scope.data.userComments
+            
+            }
+            
+            $scope.submitNR = function() {
+            
+            
+            myFirebase.set(
+            {
+            accuracy: $scope.data.accuracy,
+            barcode: $scope.data.barcode,
+            date: $scope.data.date,
+            direction: $scope.data.direction,
+            fiveAlphaBkgrnd: $scope.data.fiveAlphaBkgrnd,
+            fiveAlphaLegend: $scope.data.fiveAlphaLegend,
+            height: $scope.data.height,
+            latitude: $scope.data.latitude,
+            longitude: $scope.data.longitude,
+            msrmt: $scope.data.msrmt,
+            standardComments: $scope.data.standardComments,
+            twoAlphaBkgrnd: $scope.data.twoAlphaBkgrnd,
+            twoAlphaLegend: $scope.data.twoAlphaLegend,
+            userComments: $scope.data.userComments
+                }
+            );
+            $state.go('homePage');
+            }
 })
 
 .controller('optionsCtrl', function($scope, $ionicHistory) {
