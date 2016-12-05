@@ -193,6 +193,10 @@ angular.module('app.controllers', [])
             );
             $state.go('homePage');
             }
+            $scope.cancelNR = function() {
+            $state.go('homePage');
+            }
+
 })
 
 .controller('optionsCtrl', function($scope, $ionicHistory) {
